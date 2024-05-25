@@ -17,10 +17,18 @@ repositories {
 
 dependencies {
     // Use TestNG framework, also requires calling test.useTestNG() below
-    testImplementation("org.testng:testng:7.5.1")
+    implementation("org.testng:testng:7.5.1")
 
     // This dependency is used by the application.
     implementation("com.google.guava:guava:32.1.1-jre")
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    implementation("org.seleniumhq.selenium:selenium-java:4.20.0")
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver
+    implementation("org.seleniumhq.selenium:selenium-chrome-driver:4.20.0")
+
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -35,7 +43,12 @@ application {
     mainClass.set("buildout1_shubhampaliwal.App")
 }
 
-tasks.named<Test>("test") {
-    // Use TestNG for unit tests.
-    useTestNG()
+tasks.test {
+    useTestNG {
+        suites("java/buildout1_shubhampaliwal/testng.xml")
+        
+    }
 }
+
+
+
